@@ -1,79 +1,145 @@
 from tkinter import *
 from tkinter import filedialog, messagebox, ttk
 import pandas
+from matplotlib import pyplot as plt
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import DataBase
 
 root = Tk()
-root.title("Software")
+root.title("Shopee")
+root.minsize(1200, 600)
 root.geometry("1200x600")
 root.iconbitmap("icon.ico")
-ReceiveEmail = BooleanVar()
-ReceiveEmail.set(False)
+ReceiveEmail = BooleanVar(value=False)
+Category = DataBase.CategoryList()
 
-def add_data(tree):
+def showTable(window, data, pos):
+    window.grid_columnconfigure(pos[1], weight=1)
+    table = ttk.Treeview(window, columns=('name', 'price', 'description', 'link', 'category'), height=15, selectmode="extended")
+
+    table.heading("#0", text="ID")
+    table.heading('name', text="Tên")
+    table.heading('price', text="Giá")
+    table.heading('description', text="Mô tả")
+    table.heading('link', text="link")
+    table.heading('category', text="Phân loại")
+
+    table.column("#0", anchor=W, minwidth=50)
+    table.column('name', anchor=W, minwidth=50)
+    table.column('price', anchor=CENTER)
+    table.column('description', anchor=W, minwidth=100)
+    table.column('link', anchor=W, minwidth=100)
+    table.column('category', anchor=W, minwidth=100)
+
+    # lấy dữ liệu chèn vào bảng
+    for index, row in data.iterrows():
+        table.insert("", "end", text=row["ID"],
+                     values=(row["name"], row["gia"], row["description"], row["link"], row["category"]))
+
+    Menu_right_click = Menu(window, tearoff=0)
+    Menu_right_click.add_command(label="Thêm", command=lambda: add_data_window(table))
+    Menu_right_click.add_command(label="Sửa", command=lambda: update_data_window(table))
+    Menu_right_click.add_command(label="Xóa", command=lambda: delete_data(table))
+    Menu_right_click.add_command(label="Xóa Hết", command=lambda: delete_all_data())
+
+    table.grid(row=pos[0], column=pos[1], sticky="news")
+
+    def show_right_click_menu(event):
+        Menu_right_click.post(event.x_root, event.y_root)
+
+    # chuột phải
+    table.bind("<Button-3>", show_right_click_menu)
+
+    def resize_columns(event):
+        total_width = event.width
+        list_size = [1/10, 2/10, 1/10, 2/10, 2/10, 2/10]
+        i = 1
+        table.column("#0", width=int(total_width * list_size[0]))
+        for col in table["columns"]:
+            table.column(col, width=int(total_width * list_size[i]))
+            i += 1
+
+    # Kết nối sự kiện "Configure" với hàm resize_columns
+    table.bind("<Configure>", resize_columns)
+
+    table.bind("<<TreeviewSelect>>", lambda event: draw_graph())
+
+def add_data_window(tree):
     AddWindow = Toplevel(root)
     AddWindow.grab_set()
     AddWindow.title("Add Window")
     AddWindow.resizable(False, False)
 
-
     name = StringVar()
     price = StringVar()
     description = StringVar()
     link = StringVar()
+    category = StringVar(value=Category[0])
 
     Entry(AddWindow, textvariable=name).grid(row=0, column=0)
     Entry(AddWindow, textvariable=price).grid(row=0, column=1)
     Entry(AddWindow, textvariable=description, width=40).grid(row=0, column=2)
     Entry(AddWindow, textvariable=link, width=40).grid(row=0, column=3)
+    ttk.Combobox(AddWindow, textvariable=category, values=DataBase.CategoryList()).grid(row=0, column=4)
 
     def AddData():
-        tree.insert("", "end", text="", values=(name.get(), float(price.get()), description.get(), link.get()))
-        DataBase.Add(name.get(), float(price.get()), description.get(), link.get())
-        AddWindow.destroy()
+        try:
+            ID = DataBase.Add(name.get(), float(price.get()), description.get(), link.get(), category.get())
+            tree.insert("", "end", text= ID, values=(name.get(), float(price.get()), description.get(), link.get(), category.get()))
+            AddWindow.destroy()
+        except ValueError:
+            messagebox.showerror(message="Vui lòng nhập dữ liệu hợp lệ", parent=AddWindow, title="Error")
 
-    Button(AddWindow, text="Thêm", command=AddData).grid(row=1, column=0, columnspan=4, sticky="we")
+    Button(AddWindow, text="Thêm", command=AddData).grid(row=1, column=0, columnspan=5, sticky="we")
     AddWindow.mainloop()
 
-def update_data(tree):
-    EditWindow = Toplevel(root)
-    EditWindow.grab_set()
-    EditWindow.title("Edit Window")
-    EditWindow.resizable(False, False)
-
+def update_data_window(tree):
     # Lấy item đang được chọn
     selected_item = tree.selection()
     data = tree.item(selected_item, "values")
     ID = tree.item(selected_item, "text")
+    if data:
+        EditWindow = Toplevel(root)
+        EditWindow.grab_set()
+        EditWindow.title("Edit Window")
+        EditWindow.resizable(False, False)
+        name = StringVar(value=data[0])
+        price = StringVar(value=data[1])
+        description = StringVar(value=data[2])
+        link = StringVar(value=data[3])
+        category = StringVar(value=data[4])
 
-    name = StringVar(value=data[0])
-    price = StringVar(value=data[1])
-    description = StringVar(value=data[2])
-    link = StringVar(value=data[3])
+        Entry(EditWindow, textvariable=name).grid(row=0, column=0)
+        Entry(EditWindow, textvariable=price).grid(row=0, column=1)
+        Entry(EditWindow, textvariable=description, width=39).grid(row=0, column=2)
+        Entry(EditWindow, textvariable=link, width=40).grid(row=0, column=3)
+        ttk.Combobox(EditWindow, textvariable=category, values=DataBase.CategoryList()).grid(row=0, column=4)
 
-    Entry(EditWindow, textvariable=name).grid(row=0, column=0)
-    Entry(EditWindow, textvariable=price).grid(row=0, column=1)
-    Entry(EditWindow, textvariable=description, width=40).grid(row=0, column=2)
-    Entry(EditWindow, textvariable=link, width=40).grid(row=0, column=3)
+        def updateData():
+            try:
+                DataBase.UpdateByID(ID, name.get(), float(price.get()), description.get(), link.get(), category.get())
+                tree.item(selected_item, values=(name.get(), float(price.get()), description.get(), link.get(), category.get()))
+                EditWindow.destroy()
+            except ValueError:
+                messagebox.showerror(message="Vui lòng nhập dữ liệu hợp lệ", parent=EditWindow, title="Error")
 
-    def updateData():
-        DataBase.UpdateByID(ID, name.get(), float(price.get()), description.get(), link.get())
-        EditWindow.destroy()
-
-    Button(EditWindow, text="Xác nhận", command=updateData).grid(row = 1, column = 0, columnspan=4, sticky="we")
-    EditWindow.mainloop()
+        Button(EditWindow, text="Xác nhận", command=updateData).grid(row = 1, column = 0, columnspan=5, sticky="we")
+        EditWindow.mainloop()
 
 def delete_data(tree):
-    selected_item = tree.selection()
+    selected_items = tree.selection()
     # Lấy giá trị ở cột đầu
-    ID = tree.item(selected_item, "text")
-    DataBase.DeleteByID(ID)
-    if selected_item:
-        # Xoa dữ liệu trong bảng
-        tree.delete(selected_item)
-    print("xóa")
+    for selected_item in selected_items:
+        ID = tree.item(selected_item, "text")
+        DataBase.DeleteByID(ID)
+        if selected_item:
+            # Xoa dữ liệu trong bảng
+            tree.delete(selected_item)
 
-def print_result():
+def delete_all_data():
+    DataBase.deleteAll()
+
+def GetDataFromWeb():
     pass
 
 def schedule():
@@ -101,6 +167,19 @@ def email_entry():
     email.grid(row=1, column=0)
 
     Email_Box.mainloop()
+
+def import_data():
+    FilePath = filedialog.askopenfilename(
+        title="Import Data",
+        filetypes=(("CSV files", "*.csv"), ("All Files", "*.*"))
+    )
+
+    if FilePath:
+        data = pandas.read_csv(FilePath)
+
+        for index, row in data.iterrows():
+            DataBase.Add(row["name"], row["gia"], row["description"], row["link"])
+        messagebox.showinfo(message="Nhập dữ liệu thành công")
 
 def open_file():
     DataBase.getAllData("output.csv")
@@ -131,55 +210,62 @@ def load_data(data):
     select_data_window.grab_set()
     select_data_window.resizable(False, False)
 
-    table = ttk.Treeview(select_data_window, columns=('name', 'price', 'description', 'link'), height=15)
-    # Thêm cột chính
-    table.heading("#0", text="ID")
-    table.heading('name', text="Tên")
-    table.heading('price', text="Giá")
-    table.heading('description', text="Mô tả")
-    table.heading('link', text="link")
+    showTable(select_data_window, data, (0, 0))
 
-    # Đặt cột phụ
-    table.column("#0", width=60, anchor=W)
-    table.column('name', width=100, anchor=W)
-    table.column('price', width=150, anchor=CENTER)
-    table.column('description', width=400, anchor=W)
-    table.column('link', width=400, anchor=W)
-    # lấy dữ liệu chèn vào bảng
-    for index, row in data.iterrows():
-        table.insert("", "end", text=row["ID"], values=(row["name"], row["gia"], row["description"], row["link"]))
-
-    Menu_right_click = Menu(select_data_window, tearoff=0)
-    Menu_right_click.add_command(label="Thêm", command=lambda: add_data(table))
-    Menu_right_click.add_command(label="Sửa", command=lambda: update_data(table))
-    Menu_right_click.add_command(label="Xóa", command=lambda: delete_data(table))
-
-    table.grid(row = 0, column = 0, columnspan=2, rowspan=2)
     Button(select_data_window, text="Exit", command=select_data_window.destroy).grid(row = 2, column = 0, sticky="we", columnspan=2)
-
-    def show_right_click_menu(event):
-        Menu_right_click.post(event.x_root, event.y_root)
-
-    # Gắn sự kiện chuột phải vào Treeview
-    table.bind("<Button-3>", show_right_click_menu)
     select_data_window.mainloop()
 
+def draw_graph():
+    # Tạo dữ liệu mẫu
+    x = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+    y = [1, 4, 9, 16, 25, 36, 49]
 
-# Menu
-MenuBar = Menu(root)
+    # Tạo figure và vẽ đồ thị đường
+    fig, ax = plt.subplots()
+    ax.plot(x, y, label='Đồ thị đường', color='blue')
 
-FileMenu = Menu(MenuBar, tearoff=0) # không tách menu ra khỏi root
-FileMenu.add_command(label="Open", command=open_file)
-FileMenu.add_command(label="Save As...", command=save_as_file)
-FileMenu.add_separator()
-FileMenu.add_command(label="Exit", command=root.destroy)
+    # Thêm tiêu đề và nhãn trục
+    ax.set_title("Đồ thị đường trong Tkinter")
+    ax.set_xlabel("Trục X")
+    ax.set_ylabel("Trục Y")
+    ax.legend()
 
-SettingMenu = Menu(MenuBar, tearoff=0)
-SettingMenu.add_command(label="Email", command=email_entry)
+    # Nhúng đồ thị vào Tkinter
+    canvas = FigureCanvasTkAgg(fig, master=root)  # Khung giao diện Tkinter
+    canvas.draw()
+    canvas.get_tk_widget().grid(column=0, row=0)
 
-MenuBar.add_cascade(label="File", menu=FileMenu) # Thêm FileMenu vào menu bar
-MenuBar.add_cascade(label="Setting", menu=SettingMenu)
-root.config(menu=MenuBar)
+def change_category(category, combobox):
+    DataBase.getDataByCategory(category)
+    showTable(root, pandas.read_csv("output.csv"), (0, 1))
+    combobox.config(values=DataBase.CategoryList())
+    draw_graph()
 
+def main_window():
+    # Menu
+    MenuBar = Menu(root)
+    FileMenu = Menu(MenuBar, tearoff=0) # không tách menu ra khỏi root
+    FileMenu.add_command(label="Open", command=open_file)
+    FileMenu.add_command(label="Export", command=save_as_file)
+    FileMenu.add_command(label="Import", command=import_data)
+    FileMenu.add_separator()
+    FileMenu.add_command(label="Exit", command=root.destroy)
+    SettingMenu = Menu(MenuBar, tearoff=0)
+    SettingMenu.add_command(label="Email", command=email_entry)
+    MenuBar.add_cascade(label="File", menu=FileMenu) # Thêm FileMenu vào menu bar
+    MenuBar.add_cascade(label="Setting", menu=SettingMenu)
+    root.config(menu=MenuBar)
 
-root.mainloop()
+    cate = StringVar()
+    # Danh sach tha xuong
+    combobox = ttk.Combobox(root, values=Category, textvariable=cate, state="readonly")
+    combobox.set(Category[0])
+    combobox.grid(column=0, row=1, sticky="we")
+    # Sự kiện khi chọn 1 item trong combo box
+    combobox.bind("<<ComboboxSelected>>", lambda event: change_category(cate.get(), combobox))
+    change_category(Category[0], combobox)
+    root.mainloop()
+
+if __name__ == '__main__':
+    main_window()
+
