@@ -1,8 +1,46 @@
 ID,gia,description,link,name,category
+33,500000,Mô tả sản phẩm 1,https://example.com/san-pham1,Tên sản phẩm 1,Danh mục 1
+34,600000,Mô tả sản phẩm 2,https://example.com/san-pham2,Tên sản phẩm 2,Danh mục 2
+35,55000,Mô tả sản phẩm 3,https://example.com/san-pham3,Tên sản phẩm 3,Danh mục 1
 36,700000,Mô tả sản phẩm 4,https://example.com/san-pham4,Tên sản phẩm 4,Danh mục 3
+37,650000,Mô tả sản phẩm 5,https://example.com/san-pham5,Tên sản phẩm 5,Danh mục 2
 38,750000,Mô tả sản phẩm 6,https://example.com/san-pham6,Tên sản phẩm 6,Danh mục 3
+39,800000,Mô tả sản phẩm 7,https://example.com/san-pham7,Tên sản phẩm 7,Danh mục 2
+40,450000,Mô tả sản phẩm 8,https://example.com/san-pham8,Tên sản phẩm 8,Danh mục 2
 41,470000,Mô tả sản phẩm 9,https://example.com/san-pham9,Tên sản phẩm 9,Danh mục 3
+42,520000,Mô tả sản phẩm 10,https://example.com/san-pham10,Tên sản phẩm 10,Danh mục 2
+43,680000,Mô tả sản phẩm 11,https://example.com/san-pham11,Tên sản phẩm 11,Danh mục 2
 44,690000,Mô tả sản phẩm 12,https://example.com/san-pham12,Tên sản phẩm 12,Danh mục 3
+45,550000,Mô tả sản phẩm 13,https://example.com/san-pham13,Tên sản phẩm 13,Danh mục 5
+46,600000,Mô tả sản phẩm 14,https://example.com/san-pham14,Tên sản phẩm 14,Danh mục 7
 47,730000,Mô tả sản phẩm 15,https://example.com/san-pham15,Tên sản phẩm 15,Danh mục 3
 48,670000,Mô tả sản phẩm 16,https://example.com/san-pham16,Tên sản phẩm 16,Danh mục 3
+49,580000,Mô tả sản phẩm 17,https://example.com/san-pham17,Tên sản phẩm 17,Danh mục 2
 50,610000,Mô tả sản phẩm 18,https://example.com/san-pham18,Tên sản phẩm 18,Danh mục 3
+51,740000,Mô tả sản phẩm 19,https://example.com/san-pham19,Tên sản phẩm 19,Danh mục 6
+52,710000,Mô tả sản phẩm 20,https://example.com/san-pham20,Tên sản phẩm 20,Danh mục 2
+53,1000,Dụng cụ học tập,https://example.com/den,Đèn,Danh mục 2
+54,20000,Nội thất,https://example.com/ban-hoc,Bàn học,Danh mục 7
+55,30000,Nội thất,https://example.com/gia-sach,Giá sách,
+56,2000,Dụng cụ học tập,https://example.com/but-chi-mau-nuoc,Bút chì màu nước,Danh mục 2
+57,500,Dụng cụ học tập,https://example.com/thuoc-ke-30cm,Thước kẻ 10cm,
+58,1500,Dụng cụ học tập,https://example.com/so-tay-ghi-chu,Sổ tay ghi chú,
+59,8000,Dụng cụ học tập,https://example.com/bo-compa,Bộ compa,
+60,3000,Dụng cụ học tập,https://example.com/bang-viet-phan,Bảng viết phấn,
+61,1000,Dụng cụ học tập,https://example.com/but-bi,Bút bi mực đen,
+62,1500,Dụng cụ học tập,https://example.com/keo-dan,Keo dán khô,
+63,2500,Dụng cụ học tập,https://example.com/hop-but,Hộp đựng bút,
+64,500,Dụng cụ học tập,https://example.com/got-but-chi,Gọt bút chì,
+65,1000,Dụng cụ học tập,https://example.com/den,Đèn,
+66,20000,Nội thất,https://example.com/ban-hoc,Bàn học,
+67,30000,Nội thất,https://example.com/gia-sach,Giá sách,
+68,2000,Dụng cụ học tập,https://example.com/but-chi-mau-nuoc,Bút chì màu nước,
+69,500,Dụng cụ học tập,https://example.com/thuoc-ke-30cm,Thước kẻ 30cm,
+70,1500,Dụng cụ học tập,https://example.com/so-tay-ghi-chu,Sổ tay ghi chú,Danh mục 7
+71,8000,Dụng cụ học tập,https://example.com/bo-compa,Bộ compa,
+72,3000,Dụng cụ học tập,https://example.com/bang-viet-phan,Bảng viết phấn,Danh mục 7
+73,80000,Dụng cụ học tập,https://shopee.vn/B%E1%BA%A3ng-Vi%E1%BA%BFt-t%E1%BB%B1-x%C3%B3a-LCD-B%E1%BA%A3ng-V%E1%BA%BD-%C4%90i%E1%BB%87n-T%E1%BB%AD-Th%C3%B4ng-Minh-T%E1%BB%B1-%C4%90%E1%BB%99ng-X%C3%B3a-Th%C3%BAc-%C4%90%E1%BA%A9y-T%C6%B0-Duy-S%C3%A1ng-T%E1%BA%A1o-Cho-B%C3%A9-i.112188152.17413303098?sp_atk=43961739-e89f-4782-9909-9ac3a5004863&xptdk=43961739-e89f-4782-9909-9ac3a5004863,bảng,
+74,1000,Dụng cụ học tập,https://example.com/den,Đèn,
+75,20000,Nội thất,https://example.com/ban-hoc,Bàn học,
+76,30000,Nội thất,https://example.com/gia-sach,Giá sách,
+77,2000,Dụng cụ học tập,https://example.com/but-chi-mau-nuoc,Bút chì màu nước,

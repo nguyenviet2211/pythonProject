@@ -48,7 +48,7 @@ def CategoryList():
     return data
 
 def GetPriceByID(ID):
-    cursor.execute("SELECT gia, Time FROM gia_mat_hang WHERE ID = ?", (ID,))
+    cursor.execute("SELECT gia, Time FROM gia_moi_ngay WHERE ID = ?", (ID,))
     rows = cursor.fetchall()
     return rows
 

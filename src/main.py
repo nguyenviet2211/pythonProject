@@ -3,7 +3,72 @@ from tkinter import filedialog, messagebox, ttk
 import pandas
 from matplotlib import pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+
 import DataBase
+
+# import smtplib
+# from email.mime.text import MIMEText
+# from email.mime.multipart import MIMEMultipart
+# import ssl
+# from plyer import notification
+
+
+# Hàm gửi thông báo
+# def send_windows_notification(title, message):
+#     notification.notify(
+#         title=title,  # Tiêu đề của thông báo
+#         message=message,  # Nội dung thông báo
+#         timeout=10  # Thời gian thông báo hiển thị (tính bằng giây)
+#     )
+#
+#
+# def send_mail_notification(title, text, receiver_email):
+#     email = "pythonnoticesystem@gmail.com"
+#     # Khởi tạo đối tượng msg
+#     msg = MIMEMultipart()
+#     msg['From'] = email
+#     msg['To'] = receiver_email
+#     msg['Subject'] = title
+#
+#     # Đính kèm nội dung vào email, sử dụng mã hóa UTF-8
+#     msg.attach(MIMEText(text, 'plain', 'utf-8'))
+#     try:
+#
+#         # Kết nối tới Gmail với SSL (cổng 465)
+#         context = ssl.create_default_context()
+#         server = smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context)
+#
+#         # Đăng nhập với email và mật khẩu ứng dụng
+#         server.login(email, "zurt sebu kufn pnsj")
+#
+#         # Gửi email bằng cách sử dụng msg.as_string()
+#         server.sendmail(email, receiver_email, msg.as_string())
+#         print("Email đã được gửi thành công!")
+#
+#     except Exception as e:
+#         print(f"Đã xảy ra lỗi: {e}")
+#
+#     finally:
+#         server.quit()  # Đảm bảo đóng kết nối với server
+#
+#
+# # lấy thông tin giá sản phẩm
+# production = input("PRODUCTION: ")
+# price_stone = input("PRICE STONE: ")
+# new_price = input("NEW PRICE: ")
+# if (price_stone >= new_price):
+#     # lấy thông tin tin nhắn và thông báo
+#     title = "THÔNG BÁO"
+#     text = f"THÔNG BÁO:\nGiá sản phẩm {production} đã chạm mốc giá {price_stone}"
+#
+#     # lấy thông tin mail nhận
+#     receiver_email = input("RECEIVER EMAIL: ")
+#
+#     # 1.Thông báo qua mail
+#     send_mail_notification(title, text, receiver_email)
+#
+#     # 2. Thông báo qua windows
+#     send_windows_notification(title, text)
 
 root = Tk()
 root.title("Shopee")
@@ -62,7 +127,9 @@ def showTable(window, data, pos):
     # Kết nối sự kiện "Configure" với hàm resize_columns
     table.bind("<Configure>", resize_columns)
 
-    table.bind("<<TreeviewSelect>>", lambda event: draw_graph())
+    table.bind("<<TreeviewSelect>>", lambda event: draw_graph(table))
+
+    return table
 
 def add_data_window(tree):
     AddWindow = Toplevel(root)
@@ -215,10 +282,18 @@ def load_data(data):
     Button(select_data_window, text="Exit", command=select_data_window.destroy).grid(row = 2, column = 0, sticky="we", columnspan=2)
     select_data_window.mainloop()
 
-def draw_graph():
-    # Tạo dữ liệu mẫu
-    x = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
-    y = [1, 4, 9, 16, 25, 36, 49]
+def draw_graph(table):
+    selected_items = table.selection()
+    ID = table.item(selected_items, "text")
+
+    data_list = DataBase.GetPriceByID(ID)
+
+    x = []
+    y = []
+
+    for data in data_list:
+        x.append(data[1])
+        y.append(data[0])
 
     # Tạo figure và vẽ đồ thị đường
     fig, ax = plt.subplots()
@@ -226,8 +301,8 @@ def draw_graph():
 
     # Thêm tiêu đề và nhãn trục
     ax.set_title("Đồ thị đường trong Tkinter")
-    ax.set_xlabel("Trục X")
-    ax.set_ylabel("Trục Y")
+    ax.set_xlabel("Ngày")
+    ax.set_ylabel("Giá")
     ax.legend()
 
     # Nhúng đồ thị vào Tkinter
@@ -237,9 +312,9 @@ def draw_graph():
 
 def change_category(category, combobox):
     DataBase.getDataByCategory(category)
-    showTable(root, pandas.read_csv("output.csv"), (0, 1))
+    table = showTable(root, pandas.read_csv("output.csv"), (0, 1))
     combobox.config(values=DataBase.CategoryList())
-    draw_graph()
+    draw_graph(table)
 
 def main_window():
     # Menu
