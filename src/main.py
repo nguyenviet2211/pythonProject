@@ -64,6 +64,7 @@ def GetDataFromWeb():
     for index, row in dataFrame.iterrows():
         GetPrice.GetPrice(row['link'], row['ID'])
     check_price()
+    change_category()
 
 def check_price():
     text = ""
