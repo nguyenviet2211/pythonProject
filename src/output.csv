@@ -1,46 +1,4 @@
 ID,gia,description,link,name,category
-33,500000,Mô tả sản phẩm 1,https://example.com/san-pham1,Tên sản phẩm 1,Danh mục 1
-34,600000,Mô tả sản phẩm 2,https://example.com/san-pham2,Tên sản phẩm 2,Danh mục 2
-35,55000,Mô tả sản phẩm 3,https://example.com/san-pham3,Tên sản phẩm 3,Danh mục 1
-36,700000,Mô tả sản phẩm 4,https://example.com/san-pham4,Tên sản phẩm 4,Danh mục 3
-37,650000,Mô tả sản phẩm 5,https://example.com/san-pham5,Tên sản phẩm 5,Danh mục 2
-38,750000,Mô tả sản phẩm 6,https://example.com/san-pham6,Tên sản phẩm 6,Danh mục 3
-39,800000,Mô tả sản phẩm 7,https://example.com/san-pham7,Tên sản phẩm 7,Danh mục 2
-40,450000,Mô tả sản phẩm 8,https://example.com/san-pham8,Tên sản phẩm 8,Danh mục 2
-41,470000,Mô tả sản phẩm 9,https://example.com/san-pham9,Tên sản phẩm 9,Danh mục 3
-42,520000,Mô tả sản phẩm 10,https://example.com/san-pham10,Tên sản phẩm 10,Danh mục 2
-43,680000,Mô tả sản phẩm 11,https://example.com/san-pham11,Tên sản phẩm 11,Danh mục 2
-44,690000,Mô tả sản phẩm 12,https://example.com/san-pham12,Tên sản phẩm 12,Danh mục 3
-45,550000,Mô tả sản phẩm 13,https://example.com/san-pham13,Tên sản phẩm 13,Danh mục 5
-46,600000,Mô tả sản phẩm 14,https://example.com/san-pham14,Tên sản phẩm 14,Danh mục 7
-47,730000,Mô tả sản phẩm 15,https://example.com/san-pham15,Tên sản phẩm 15,Danh mục 3
-48,670000,Mô tả sản phẩm 16,https://example.com/san-pham16,Tên sản phẩm 16,Danh mục 3
-49,580000,Mô tả sản phẩm 17,https://example.com/san-pham17,Tên sản phẩm 17,Danh mục 2
-50,610000,Mô tả sản phẩm 18,https://example.com/san-pham18,Tên sản phẩm 18,Danh mục 3
-51,740000,Mô tả sản phẩm 19,https://example.com/san-pham19,Tên sản phẩm 19,Danh mục 6
-52,710000,Mô tả sản phẩm 20,https://example.com/san-pham20,Tên sản phẩm 20,Danh mục 2
-53,1000,Dụng cụ học tập,https://example.com/den,Đèn,Danh mục 2
-54,20000,Nội thất,https://example.com/ban-hoc,Bàn học,Danh mục 7
-55,30000,Nội thất,https://example.com/gia-sach,Giá sách,
-56,2000,Dụng cụ học tập,https://example.com/but-chi-mau-nuoc,Bút chì màu nước,Danh mục 2
-57,500,Dụng cụ học tập,https://example.com/thuoc-ke-30cm,Thước kẻ 10cm,
-58,1500,Dụng cụ học tập,https://example.com/so-tay-ghi-chu,Sổ tay ghi chú,
-59,8000,Dụng cụ học tập,https://example.com/bo-compa,Bộ compa,
-60,3000,Dụng cụ học tập,https://example.com/bang-viet-phan,Bảng viết phấn,
-61,1000,Dụng cụ học tập,https://example.com/but-bi,Bút bi mực đen,
-62,1500,Dụng cụ học tập,https://example.com/keo-dan,Keo dán khô,
-63,2500,Dụng cụ học tập,https://example.com/hop-but,Hộp đựng bút,
-64,500,Dụng cụ học tập,https://example.com/got-but-chi,Gọt bút chì,
-65,1000,Dụng cụ học tập,https://example.com/den,Đèn,
-66,20000,Nội thất,https://example.com/ban-hoc,Bàn học,
-67,30000,Nội thất,https://example.com/gia-sach,Giá sách,
-68,2000,Dụng cụ học tập,https://example.com/but-chi-mau-nuoc,Bút chì màu nước,
-69,500,Dụng cụ học tập,https://example.com/thuoc-ke-30cm,Thước kẻ 30cm,
-70,1500,Dụng cụ học tập,https://example.com/so-tay-ghi-chu,Sổ tay ghi chú,Danh mục 7
-71,8000,Dụng cụ học tập,https://example.com/bo-compa,Bộ compa,
-72,3000,Dụng cụ học tập,https://example.com/bang-viet-phan,Bảng viết phấn,Danh mục 7
-73,80000,Dụng cụ học tập,https://shopee.vn/B%E1%BA%A3ng-Vi%E1%BA%BFt-t%E1%BB%B1-x%C3%B3a-LCD-B%E1%BA%A3ng-V%E1%BA%BD-%C4%90i%E1%BB%87n-T%E1%BB%AD-Th%C3%B4ng-Minh-T%E1%BB%B1-%C4%90%E1%BB%99ng-X%C3%B3a-Th%C3%BAc-%C4%90%E1%BA%A9y-T%C6%B0-Duy-S%C3%A1ng-T%E1%BA%A1o-Cho-B%C3%A9-i.112188152.17413303098?sp_atk=43961739-e89f-4782-9909-9ac3a5004863&xptdk=43961739-e89f-4782-9909-9ac3a5004863,bảng,
-74,1000,Dụng cụ học tập,https://example.com/den,Đèn,
-75,20000,Nội thất,https://example.com/ban-hoc,Bàn học,
-76,30000,Nội thất,https://example.com/gia-sach,Giá sách,
-77,2000,Dụng cụ học tập,https://example.com/but-chi-mau-nuoc,Bút chì màu nước,
+104,66951,Mô Tả,https://www.lazada.vn/products/usb-high-speed-flash-drive-30-large-capacity-128gb-256gb-512gb-1tb-2tb-pendrive-mini-portable-for-pc-and-mobile-i2464854439-s12086618036.html?pvid=4892df63-12e8-49e1-8607-ee6c4f7e7b60&search=jfy&scm=1007.45039.318630.0&priceCompare=skuId%3A12086618036%3Bsource%3Atpp-recommend-plugin-32104%3Bsn%3A4892df63-12e8-49e1-8607-ee6c4f7e7b60%3BoriginPrice%3A66951%3BdisplayPrice%3A66951%3BsinglePromotionId%3A900000035634051%3BsingleToolCode%3AflashSale%3BvoucherPricePlugin%3A0%3Btimestamp%3A1732112997715&spm=a2o4n.homepage.just4u.d_2464854439,USB 1,USB
+105,80969,Mô Tả,"https://www.lazada.vn/products/2tb-o-dia-flash-3-trong-1-usb-otg-loai-cmicro-o-dia-flash-1tb-512gb-256gb-o-usb-nho-o-dia-toc-do-cao-cho-dien-thoai-i2546681716-s12464989493.html?&search=pdp_same_topselling?spm=a2o4n.pdp_revamp.recommendation_1.1.31ab3208DfrRaK&mp=1&scm=1007.16389.286994.0&clickTrackInfo=677685b3-476c-4e61-b1f2-2851b44d0d5d__2546681716__12167__trigger2i__224806__0.88__0.88__0.0__0.0__0.0__0.88__0__null__null__null__null__null__null____123000.0__0.34171544715447155__4.682142857142857__482__80969.0__1002842,1295846,1332832,1359914,1469056,1469057,1469255,722930,1019849,1498937,524666,524665,680968,286097,681938,773912,1242190,285680,649019,113326,1294841,1333836,1002838,1019852,874801,1019851,720186,1019850,1243777,526696,1363899,526697,1175849,679072,681941,1036810,1363937,772896,12005,1241045,846849,1518243,1022835,523823,1022832,1469275,875801,1519251,1331880,1334873,1518281,525498,1044902,524489,681876,720928,1175850,846850,1470220,1292886,1293810,1001842,1241177,1331879,1748187,1292885,1021830,1331878,1334825,722188,731839,248834,1332885,1332883,1001844,1379932,1359942,1379933,1636885,1470979,1243030,524490__null__null__null__955.7333_3650.16537_3650.16504_955.3631__null__13426__null__0.0__0.0________null__null",USB 2,USB
+106,83000,Mô Tả,"https://www.lazada.vn/products/cod100-xiaomi-nguyen-ban-type-c-o-dia-flash-512gb-1tb-2tb-the-nho-usb-32gb-64gb-kim-loai-khong-tham-nuoc-o-usb-nho-i2591122611-s13491680048.html?&search=pdp_same_topselling?spm=a2o4n.pdp_revamp.recommendation_1.2.31ab3208e87ChB&mp=1&scm=1007.16389.286994.0&clickTrackInfo=1a2d9a47-d843-4088-9c9e-59d89141cac0__2591122611__12166__trigger2i__224806__0.215__0.215__0.0__0.0__0.0__0.215__1__null__null__null__null__null__null____124000.0__0.3306451612903226__4.597701149425287__119__83000.0__1242132,1295941,1101163,1469275,339521,1469056,1469057,1469255,1519251,1498937,110373,1099172,286097,1470220,285680,113326,394521,775873,1231907,749824,96350,1379932,1379933,1363899,1470979,320505,284684__null__null__null__3650.16504_3650.16539_955.3631_955.7331__null__13426__null__0.0__0.0________null__null",USB 3,USB

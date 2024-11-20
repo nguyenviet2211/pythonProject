@@ -26,18 +26,30 @@ def DeleteByID(ID):
     cursor.execute("DELETE FROM san_pham WHERE id=?", (ID,))
     connection.commit()
 
+def GetIdAndLink():
+    cursor.execute("SELECT ID, link FROM san_pham")
+    rows = cursor.fetchall()
+    SendToCsvFile('output.csv', rows)
+
 def Add(name, price, description, link, category=None):
     cursor.execute("INSERT INTO san_pham (name, gia, description, link, category) VALUES (?, ?, ?, ?, ?)"
                    , (name, price, description, link, category))
     connection.commit()
     return cursor.lastrowid
 
-def deleteAll():
-    cursor.execute("DELETE FROM san_pham")
+def deleteAll(category):
+    if category != 'None':
+        cursor.execute("DELETE FROM san_pham WHERE category = ?", (category,))
+    else:
+        cursor.execute("DELETE FROM san_pham WHERE category IS NULL")
     connection.commit()
 
 def getDataByCategory(category):
-    cursor.execute("SELECT * FROM san_pham WHERE category = ?", (category,))
+    if category != "None":
+        cursor.execute("SELECT * FROM san_pham WHERE category = ?", (category,))
+    else:
+        cursor.execute('SELECT * FROM san_pham WHERE category IS NULL')
+
     rows = cursor.fetchall()
     SendToCsvFile("output.csv", rows)
 
@@ -52,8 +64,20 @@ def GetPriceByID(ID):
     rows = cursor.fetchall()
     return rows
 
-def GetPriceByTimeAndCategory(ID, category):
-    pass
+def GetPriceByCategory(category):
+    cursor.execute("""
+        SELECT AVG(gia_moi_ngay.gia) as gia, Time 
+        FROM gia_moi_ngay 
+        JOIN san_pham ON gia_moi_ngay.ID = san_pham.ID 
+        WHERE category = ? 
+        GROUP BY Time
+    """, (category,))
+    rows = cursor.fetchall()
+    return rows
+
+def UpdatePriceById(ID, price):
+    cursor.execute("UPDATE san_pham SET gia = ? WHERE ID = ?", (price, ID))
+    connection.commit()
 
 # cursor.execute("SELECT name, sql FROM sqlite_master WHERE type IN ('trigger', 'table');")
 # rows = cursor.fetchall()
@@ -91,6 +115,3 @@ def GetPriceByTimeAndCategory(ID, category):
 # BEGIN
 #     DELETE FROM gia_moi_ngay WHERE ID = OLD.ID;
 # END;""")
-
-
-
