@@ -79,6 +79,7 @@ def check_price():
             category = 'None'
         else:
             category = row['category']
+
         if dataFrame2.loc[0, category] == 't' and int(row['gia']) < int(dataFrame2.loc[1, category]):
             text += f"Giá sản phẩm <a href='{row['link']}' target='_blank'>{row['name']}</a> đã chạm mốc giá {dataFrame2.loc[1, category]} {category}.<br><br>"
     if text != "":

@@ -1,3 +1,4 @@
+import os
 from tkinter import messagebox
 from bs4 import BeautifulSoup
 from selenium import webdriver
@@ -9,16 +10,19 @@ import DataBase
 from time import sleep
 import re
 
+
+user_name = (os.path.basename(os.environ['USERPROFILE']))
+
 def GetPrice(link, ID):
     chrome_options = Options()
-    chrome_options.add_argument('user-data-dir=C:\\Users\\vietPC\\AppData\\Local\\Google\\Chrome\\User Data')
+    chrome_options.add_argument(f'user-data-dir=C:\\Users\\{user_name}\\AppData\\Local\\Google\\Chrome\\User Data')
     chrome_options.add_argument('--no-sandbox')
     chrome_options.add_argument('--disable-dev-shm-usage')
     # Ẩn cửa sổ
-    chrome_options.add_argument('--headless')
+    # chrome_options.add_argument('--headless')
     # invoke the webdriver
     service = Service("chromedriver-win64/chromedriver.exe")
-    delay = 10 #seconds
+    delay = 15 #seconds
     price = ""
 
     try:
@@ -49,9 +53,9 @@ def GetPrice(link, ID):
         price = re.sub(unwanted_chars, "", price)
         prices = list(map(str, price.split()))
         if prices:
-            DataBase.UpdatePriceById(ID, price[0])
+            DataBase.UpdatePriceById(ID, prices[0])
         else:
             messagebox.showerror("có lỗi xảy ra khi lấy dữ liệu, kiểm tra lại trình duyệt.")
         browser.close()
-    except SessionNotCreatedException:
-        messagebox.showerror(title="Error", message="Tắt chrome đi")
+    except SessionNotCreatedException as e:
+        messagebox.showerror(title="Error", message=str(e))
