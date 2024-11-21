@@ -56,6 +56,10 @@ def GetPrice(link, ID):
             DataBase.UpdatePriceById(ID, prices[0])
         else:
             messagebox.showerror("có lỗi xảy ra khi lấy dữ liệu, kiểm tra lại trình duyệt.")
+            return "error"
         browser.close()
     except SessionNotCreatedException as e:
         messagebox.showerror(title="Error", message=str(e))
+        return "error"
+
+    return ""

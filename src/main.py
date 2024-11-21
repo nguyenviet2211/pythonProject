@@ -62,7 +62,8 @@ def GetDataFromWeb():
     dataFrame = pandas.read_csv("output.csv")
 
     for index, row in dataFrame.iterrows():
-        GetPrice.GetPrice(row['link'], row['ID'])
+        if GetPrice.GetPrice(row['link'], row['ID']) == "error":
+            break
     check_price()
     change_category()
 
